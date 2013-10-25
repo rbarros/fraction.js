@@ -20,7 +20,8 @@
     }
   ],
   "dependencies": {
-    "jquery": "*"
+    "jquery": "*",
+    "group": "git://github.com/ramon/group.js"
   },
   "keywords": []
 }

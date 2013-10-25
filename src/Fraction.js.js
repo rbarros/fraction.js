@@ -102,7 +102,7 @@
         var s = num.toString(), group;
         s = s.slice(2, 11);
         group = new Group(s);
-        if (group.length <= 1 && this.countGroup(group[0]) === group[0].length) {
+        if (group.length <= 1 && this.countGroup(group[0])==group[0].length) {
             this._dizimaSimples(group);
         } else {
             this._dizimaComposta(group);
@@ -115,7 +115,7 @@
             for (y = 0; y <= s.length; y += 1) {
                 if (s[x] === s[y]) { cnt += 1; }
             }
-            //break;
+            break;
         }
         return cnt;
     };
@@ -136,6 +136,7 @@
                 cant += "0";
             }
             for (x = 0; x < per.length; x += 1) {
+                if(cper.length == 9) { break; }
                 g += per[x];
                 for (y = 1; y < per.length; y += 1) {
                     cper += "9";
@@ -149,12 +150,14 @@
         } else {
             per = array[0];
             for (x = 0; x < per.length; x += 1) {
+                if(cper.length == 9) { break; }
                 g += per[x];
                 for (y = 1; y < per.length; y += 1) {
                     cper += "9";
                     if (per[x] === per[y]) { p = true; break; }
                     if (per[x] !== per[y]) { g += per[y]; }
                 }
+                if (p) { break; }
             }
             this.numerator = array[0];
             this.denominator = parseInt(cper, 10);
@@ -196,124 +199,3 @@
 
     window.Fraction = Fraction;
 }(jQuery, window));
-
-/*!
- * Group JavaScript Library v2.0
- *
- * Copyright 2012, Ramon Barros
- * http://public.ramon-barros.com/
- * 
- *
- * Includes jQuery JavaScript Library v1.4.2
- * http://jquery.com/
- * Copyright 2010, John Resig
- * Dual licensed under the MIT or GPL Version 2 licenses.
- * 
- * 
- * Date: Tue Nov 20 2012 17:16:39 GMT-0200 (BRST)
- */
-
-/* jslint devel: true, unparam: true, indent: 4 */
-/* global $,document,window,event,url */
-(function (window) {
-    'use strict';
-    var Group = function (num) {
-        this.s = num.toString();
-        this.ar = [];
-        this.setGroup(this.s);
-        this.group = this.getGroup();
-        return this.group;
-    };
-
-    Group.prototype.setGroup = function (s) {
-        var x, obj = [], c;
-        for (x = 0; x <= s.length - 1; x += 1) {
-            c = s[x];
-            if (this.arrHasDupes(obj, c) === false) {
-                obj.push({
-                    num: c,
-                    array: this.checkIndex(c, s)
-                });
-            }
-        }
-        this.checkGroup(obj);
-    };
-
-    Group.prototype.checkIndex = function (c, s) {
-        var ar = [],
-            x = 0;
-        while (x <= s.length - 1) {
-            if (c === s[x] && s[x].indexOf(c) !== -1) {
-                ar.push(x);
-            }
-            x += 1;
-        }
-        return ar;
-    };
-
-    Group.prototype.checkGroup = function (obj) {
-        var i, j, n, y, k, x, me = [],
-            ma = [], mee, maa, ne, group;
-        n = obj.length;
-        for (i = 0; i < n; i += 1) {
-            if ((obj[i].array).length <= 1) { me.push(obj[i].array); }
-            if ((obj[i].array).length > 1) { ma.push(obj[i].array); }
-        }
-        mee = me.join(",").split(",").sort();
-        maa = ma.join(",").split(",").sort();
-        ne = mee.length;
-        j = 0;
-        if (ne > 0 && mee[0] !== "") {
-            for (i = 0; i < ne; i += 1) {
-                if (parseInt(mee[i], 10) === parseInt(j, 10)) {
-                    j += 1;
-                } else if (parseInt(mee[i], 10) !== parseInt(j, 10)) {
-                    mee.push(String(i));
-                    mee.sort();
-                    for (y = 0; y < maa.length; y += 1) {
-                        k = maa[y].indexOf(i);
-                        if (k !== -1) {
-                            delete maa[k];
-                        }
-                    }
-                }
-            }
-            group = "";
-            for (x in mee) {
-                if (mee.hasOwnProperty(x)) {
-                    group += this.s[mee[x]];
-                }
-            }
-            if (group !== "undefined") { this.ar.push(group); }
-            group = "";
-            for (x in maa) {
-                if (maa.hasOwnProperty(x)) {
-                    group += this.s[maa[x]];
-                }
-            }
-            if (group !== "undefined") { this.ar.push(group); }
-        } else {
-            group = "";
-            for (x in maa) {
-                if (maa.hasOwnProperty(x)) {
-                    group += this.s[maa[x]];
-                }
-            }
-            this.ar.push(group);
-        }
-    };
-
-    Group.prototype.arrHasDupes = function (obj, num) {
-        var i, n;
-        n = obj.length;
-        for (i = 0; i < n; i += 1) {
-            if (obj[i].num === num) { return true; }
-        }
-        return false;
-    };
-
-    Group.prototype.getGroup = function () {
-        return this.ar;
-    };
-    window.Group = Group;
-}(window));
