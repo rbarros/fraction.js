@@ -15,7 +15,7 @@ In your web page:
 <script src="https://raw.github.com/rbarros/group.js/master/dist/Group.min.js"></script>
 <script src="dist/Fraction.js.min.js"></script>
 <script>
-var fracao = new Fraction(1).fraction.fraction;
+var fracao = new Fraction(1).fraction;
 // 1/1
 </script>
 ```
