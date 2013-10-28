@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
     'use strict';
     grunt.initConfig({
-        pkg: grunt.file.readJSON('Fraction.js.jquery.json'),
+        pkg: grunt.file.readJSON('Fraction.js.json'),
         banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
               '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
               '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +

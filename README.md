@@ -5,15 +5,15 @@ Convert decimal to fraction
 ## Getting Started
 Download the [production version][min] or the [development version][max].
 
-[min]: https://raw.github.com/rbarros/fraction.js/master/dist/Fraction.js.min.js
-[max]: https://raw.github.com/rbarros/fraction.js/master/dist/Fraction.js.js
+[min]: https://raw.github.com/rbarros/fraction.js/master/dist/Fraction.min.js
+[max]: https://raw.github.com/rbarros/fraction.js/master/dist/Fraction.js
 
 In your web page:
 
 ```html
 <script src="jquery.js"></script>
 <script src="https://raw.github.com/rbarros/group.js/master/dist/Group.min.js"></script>
-<script src="dist/Fraction.js.min.js"></script>
+<script src="dist/Fraction.min.js"></script>
 <script>
 var fracao = new Fraction(1).fraction;
 // 1/1
