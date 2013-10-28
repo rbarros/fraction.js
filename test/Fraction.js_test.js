@@ -135,7 +135,7 @@
     deepEqual(new Fraction(0.125).fraction, "1/8");
   });
 
-  module('Conversão de dizima periódica composta');
+  module('Conversão de dizima periódica simples');
 
   test('"Inteiro 0.666666666 = 2/3"', function(){
     expect(1);
@@ -164,7 +164,7 @@
     deepEqual(new Fraction(0.125252525).fraction, "62/495");
   });
 
-  test('"Inteiro 0.047777777 = 62/495"', function(){
+  test('"Inteiro 0.047777777 = 43/900"', function(){
     expect(1);
     deepEqual(new Fraction(0.047777777).fraction, "43/900");
   });

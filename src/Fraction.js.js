@@ -25,14 +25,15 @@
         this.numerator = null;
         this.denominator = null;
         this.str = null;
+        this.k_c_virgula = null;
         this.c_virgula = null;
         // Verifica se o num é number e diferente de -1
         if (typeof num === "number" && num !== -1) {
             // Transforma em string para verificar as casas decimais
             this.str = num.toString();
-            if (this.str.indexOf(".") > 0) { // Se contem ponto executa  
+            if ((this.k_c_virgula = this.str.indexOf(".") + 1) > 0) { // Se contem ponto executa  
                 // verifica quantas casa depois do ponto
-                this.c_virgula = this.str.slice(this.str.indexOf(".") + 1).length;
+                this.c_virgula = this.str.slice(this.k_c_virgula).length;
                 if (this.c_virgula > 1 && this.c_virgula < 9) { // Se contiver mais de 1 casa após o ponto executa
                     // Aplica potenciação Exp: 0.175
                     // 3 casas depois do ponto
@@ -100,9 +101,9 @@
 
     Fraction.prototype.checkDizima = function (num) {
         var s = num.toString(), group;
-        s = s.slice(2, 11);
+        s = s.slice(this.k_c_virgula, s.length);
         group = new Group(s);
-        if (group.length <= 1 && this.countGroup(group[0])==group[0].length) {
+        if (group.length <= 1 && this.countGroup(group[0]) == group[0].length) {
             this._dizimaSimples(group);
         } else {
             this._dizimaComposta(group);
