@@ -6,7 +6,7 @@ Convert decimal to fraction
 Download the [production version][min] or the [development version][max].
 
 [min]: https://raw.github.com/rbarros/fraction.js/master/dist/Fraction.min.js
-[max]: https://raw.github.com/rbarros/fraction.js/master/dist/Fraction.js
+[max]: https://raw.github.com/rbarros/fraction.js/master/src/Fraction.js
 
 In your web page:
 
