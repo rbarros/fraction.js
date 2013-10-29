@@ -15,8 +15,8 @@
  * Date: Tue Nov 20 2012 17:16:39 GMT-0200 (BRST)
  */
 
-/* jslint devel: true, unparam: true, indent: 4, nomen: true */
-/* global jQuery,$,document,window,event,url,Group */
+/*jslint devel: true, unparam: true, indent: 4, nomen: true */
+/*global jQuery,$,document,window,event,url,Group */
 (function ($, window) {
     'use strict';
 
@@ -31,7 +31,9 @@
         if (typeof num === "number" && num !== -1) {
             // Transforma em string para verificar as casas decimais
             this.str = num.toString();
-            if ((this.k_c_virgula = this.str.indexOf(".") + 1) > 0) { // Se contem ponto executa  
+            this.k_c_virgula = this.str.indexOf(".") + 1;
+            // Se contem ponto executa
+            if (this.k_c_virgula > 0) {
                 // verifica quantas casa depois do ponto
                 this.c_virgula = this.str.slice(this.k_c_virgula).length;
                 if (this.c_virgula > 1 && this.c_virgula < 9) { // Se contiver mais de 1 casa após o ponto executa
@@ -103,7 +105,7 @@
         var s = num.toString(), group;
         s = s.slice(this.k_c_virgula, s.length);
         group = new Group(s);
-        if (group.length <= 1 && this.countGroup(group[0]) == group[0].length) {
+        if (group.length <= 1 && this.countGroup(group[0]) === group[0].length) {
             this._dizimaSimples(group);
         } else {
             this._dizimaComposta(group);
@@ -137,7 +139,7 @@
                 cant += "0";
             }
             for (x = 0; x < per.length; x += 1) {
-                if(cper.length == 9) { break; }
+                if (cper.length === 9) { break; }
                 g += per[x];
                 for (y = 1; y < per.length; y += 1) {
                     cper += "9";
@@ -151,7 +153,7 @@
         } else {
             per = array[0];
             for (x = 0; x < per.length; x += 1) {
-                if(cper.length == 9) { break; }
+                if (cper.length === 9) { break; }
                 g += per[x];
                 for (y = 1; y < per.length; y += 1) {
                     cper += "9";

@@ -8,9 +8,10 @@
 
 (function (window, undefined) {
     'use strict';
-    var Group = function(string) {
-        this.version = '1.0';
+    var Group = function(string, divide) {
+        this.version = '1.1';
         this.groups = [];
+        this.divide = divide || false;
 
 
         if (string === undefined) {
@@ -77,7 +78,7 @@
      * @return {array} retorna os grupos de caracteres
      */
     Group.prototype.checkGroups = function () {
-        var i, j, y, n, k, x, key, caracter, string, aux = [], equal, grupo_menor = [], grupo_maior = [], ar = [], group, obj = this.groups;
+        var i, j, y, n, n_position, k, x, key, position, caracter, aux = [], equal, grupo_menor = [], grupo_maior = [], ar = [], group, obj = this.groups;
 
         /**
          * Verifica se o array de posições é menor/igual a 1
@@ -95,42 +96,64 @@
         grupo_maior = grupo_maior.join(",").split(",").sort();
 
         if ((grupo_menor.length === 0 || grupo_menor[0] === "") && obj.length > 1) {
-            string = this.string.split('').reverse().join('');
+            //string = this.string.split('').reverse().join('');
             grupo_maior.reverse();
             group = "";
             x = 0;
+            n_position = 0;
+            n = 0;
             for (i = 0; i < grupo_maior.length; i += 1) {
-                caracter = this.string[grupo_maior[i]];
+                position = grupo_maior[i];
+                caracter = this.string[position];
                 for (j = 0; j < obj.length; j += 1) {
                     if (obj[j].caracter === caracter) {
                         n = (obj[j].position).length;
                     }
                 }
-
                 key = group.indexOf(caracter);
                 if (key !== -1 || group === "") {
-                    equal = true;
                     group += caracter;
                     if ((group.length % n) === 0) {
                         aux[x] = group;
                         group = "";
                         x += 1;
                     }
+                    equal = true;
                 } else {
-                    equal = false;
                     group += caracter;
-                    if ((group.length % n) === 0) {
-                        aux += group.split('').reverse().join('');
-                        group = "";
-                        x += 1;
+                    if (Math.floor(this.string.length / n) > n_position) {
+                        n_position = Math.floor(this.string.length / n);
                     }
+                    if ((group.length % n_position) === 0) {
+                        if (aux[x]) {
+                            aux[x] += group.split('').reverse().join('');
+                        } else {
+                            aux[x] = group.split('').reverse().join('');
+                        }
+                        group = "";
+                        if (this.divide === true) {
+                            x += 1;
+                        }
+                    }
+                    equal = false;
                 }
+            }
+
+            n = 0;
+            group = "";
+            for (i = 0; i < aux.length; i += 1) {
+                n += aux[i].length;
+                group += aux[i];
+            }
+
+            if (n < this.string.length) {
+                aux.push(this.string.replace(group, ""));
             }
 
             if (equal) {
                 ar = aux.reverse();
             } else {
-                ar = [aux];
+                ar = aux.reverse();
             }
         }
 
@@ -152,6 +175,9 @@
                         }
                     }
                 }
+
+                grupo_maior.sort();
+
                 group = "";
                 for (x in grupo_menor) {
                     if (grupo_menor.hasOwnProperty(x)) {

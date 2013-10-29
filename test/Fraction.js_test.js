@@ -179,9 +179,9 @@
     deepEqual(new Fraction(0.225252525).fraction, "223/990");
   });
 
-  test('"Inteiro 0.101230123 = 10122/99990"', function(){
+  test('"Inteiro 0.101230123 = 1687/16665"', function(){
     expect(1);
-    deepEqual(new Fraction(0.101230123).fraction, "10122/99990");
+    deepEqual(new Fraction(0.101230123).fraction, "1687/16665");
   });
 
 }(jQuery));
