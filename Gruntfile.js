@@ -37,7 +37,17 @@ module.exports = function(grunt) {
             }
         },
         qunit: {
-            files: ['test/**/*.html']
+            options: {
+                '--web-security': 'no',
+                coverage: {
+                  src: ['src/**/*.js'],
+                  instrumentedFiles: 'temp/',
+                  htmlReport: 'report/coverage',
+                  coberturaReport: 'report/',
+                  linesThresholdPct: 85
+                }
+            },
+            all: ['test/**/*.html']
         },
         uglify: {
             options: {
@@ -55,6 +65,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-qunit');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-qunit-istanbul');
 
     grunt.registerTask('default', ['connect:server', 'less', 'qunit', 'uglify']);
 }
